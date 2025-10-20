@@ -1,3 +1,4 @@
+//go build -o out && ./out
 package main
 
 import (
