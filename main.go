@@ -1,4 +1,4 @@
-//go build -o out && ./out
+// go build -o out && ./out
 package main
 
 import (
@@ -8,10 +8,13 @@ import (
 func main() {
 	//Create a new http.ServeMux
 	mux := http.NewServeMux()
+	//Use the http.NewServeMux's .Handle() method to add a handler for the root path (/).
+	//Use a standard http.FileServer as the handler
+	//Use http.Dir to convert a filepath (in our case a dot: . which indicates the current directory) to a directory for the http.FileServer.
+	mux.Handle("/", http.FileServer(http.Dir(".")))
 
 	//Create a new http.Server struct.
 	server := http.Server{}
-
 	//Use the new "ServeMux" as the server's handler
 	server.Handler = mux
 
@@ -20,17 +23,4 @@ func main() {
 
 	//Use the server's ListenAndServe method to start the server
 	server.ListenAndServe()
-
-	//Build and run your server (e.g. go build -o out && ./out)
-
-	//Open http://localhost:8080 in your browser. You should see a 404 error because we haven't connected any handler logic yet. Don't worry, that's what is expected for the tests to pass for now.
-	//for {}
 }
-
-/*
-
-
-
-
-
- */
